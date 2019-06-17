@@ -22,7 +22,7 @@ class Expander:
                 result.append(TextQuote(text, quote))
         return result
 
-    def _expansion(self, text):
+    def _expansion(self, text): # MOCK should change for better expansion var
         result = list()
         for word in text.split(' '):
             if word and word[0] == '$':
