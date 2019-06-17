@@ -1,6 +1,6 @@
 from expander import Expander
 from models import TextQuote
-from models.cmd import Cmd, MetaCmd
+from models.cmd import Cmd, Pipe
 
 
 class Parser:
@@ -56,7 +56,7 @@ class Parser:
             else:
                 cmd = Cmd(name_of_cmd.text, parameters, self.env)
 
-            root_cmd = cmd if root_cmd is None else MetaCmd(root_cmd, cmd)
+            root_cmd = cmd if root_cmd is None else Pipe(root_cmd, cmd)
 
         root_cmd = root_cmd if root_cmd else Cmd('_nothing', [], self.env)
         return root_cmd
