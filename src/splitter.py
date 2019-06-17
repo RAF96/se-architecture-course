@@ -3,7 +3,8 @@ from models import TextQuote
 
 class Splitter:
     '''
-        Splitter
+        Отвественный за:
+        -- переводит строку в список из необрамленных и обрамленных  кавычками выражений
     '''
 
     def run(self, line, additional_delimiters=""):
@@ -34,6 +35,4 @@ class Splitter:
             result.append(TextQuote(line[begin_data:], ""))
             begin_data = index + 1
 
-
         return result
-
