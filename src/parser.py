@@ -5,7 +5,9 @@ from models.cmd import Cmd, MetaCmd
 
 class Parser:
     '''
-        Parser
+        Ответственный за:
+        -- разбиение по pipes
+        -- создание команд
     '''
 
     def __init__(self, env):
@@ -19,8 +21,8 @@ class Parser:
             if quote != '':
                 list_of_tokens.append(TextQuote(text, quote))
             else:
-                for text in text.split('|'):
-                    for element in text.split():
+                for words in text.split('|'):
+                    for element in words.split():
                         list_of_tokens.append(TextQuote(element, ""))
                     list_of_tokens.append(TextQuote("", "|"))
                 else:
