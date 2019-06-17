@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from environment import Environment
 from models import TextQuote
-from models.cmd import Cmd, MetaCmd
+from models.cmd import Cmd, Pipe
 from parser import Parser
 
 
@@ -49,7 +49,7 @@ class TestParser(TestCase):
         request = 'exit | exit'
         first_cmd = Cmd('exit', [], env)
         second_cmd = Cmd('exit', [], env)
-        expected = MetaCmd(first_cmd, second_cmd)
+        expected = Pipe(first_cmd, second_cmd)
         self.assertEqual(expected, Parser(env).run(request))
 
 
