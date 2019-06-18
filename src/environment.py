@@ -18,3 +18,5 @@ class Environment:
     def set_var(self, name, value):
         self._dict_of_vars[name] = value
 
+    def cmd_exist(self, name):
+        return name in self._dict_of_cmds

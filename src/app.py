@@ -16,10 +16,13 @@ class App:
 
     def run(self):
         while not self.need_exit():
-            self.before()
-            line = input()
-            root_cmd = Parser(self.env).run(line)
-            root_cmd.run()
+            try:
+                self.before()
+                line = input()
+                root_cmd = Parser(self.env).run(line)
+                root_cmd.run()
+            except RuntimeError as e:
+                print(e)
 
     def need_exit(self):
         return self.env.get_var('NEED_EXIT')
@@ -28,7 +31,7 @@ class App:
         print(self.env.get_var('print_prefix'), end='')
 
 
-if __name__ ==  "__main__":
+if __name__ == "__main__":
     try:
         App().run()
     except:
