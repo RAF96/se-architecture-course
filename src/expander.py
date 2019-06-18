@@ -22,11 +22,11 @@ class Expander:
                 result.append(TextQuote(text, quote))
         return result
 
-    def _expansion(self, text): # MOCK should change for better expansion var
+    def _expansion(self, text):
         result = list()
         for word in text.split(' '):
-            if word and word[0] == '$':
-                empty, *vars = word.split('$')
-                word = "".join([self.env.get_var(var) for var in vars])
+            if word:
+                before, *vars = word.split('$')
+                word = before + "".join([self.env.get_var(var) for var in vars])
             result.append(word)
         return " ".join(result)
