@@ -1,5 +1,5 @@
-from cmds.cmd import *
-from cmds.internal_cmd import _nothing, _assignment_operator
+from cmds.implementation_cmd import *
+from cmds.implementation_internal_cmd import _nothing, _assignment_operator
 
 DICT_OF_CMDS = {
     'cat': cat,

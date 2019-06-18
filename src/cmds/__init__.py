@@ -1,2 +1,2 @@
-from .cmd import *
-from .internal_cmd import *
+from .implementation_cmd import *
+from .implementation_internal_cmd import *
