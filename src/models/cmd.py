@@ -8,8 +8,6 @@ class Cmd:
     '''
 
     def __init__(self, name, parameters, env):
-        if not env.cmd_exist(name):
-            raise RuntimeError("command doesn't exist")
         self.name = name
         self.parameters = parameters
         self.env = env

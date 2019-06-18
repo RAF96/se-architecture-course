@@ -12,3 +12,11 @@ def _nothing(parameters, input_stream, output_stream, env):
         Команда, которая ничего не делает
     '''
     return
+
+
+def _external(name, parameters, input_stream, output_stream, env):
+    '''
+        внешняя команда. Используется, когда другой комманды не нашлось
+    '''
+    import subprocess
+    subprocess.call(name, stdout=output_stream)

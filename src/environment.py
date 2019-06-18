@@ -10,7 +10,10 @@ class Environment:
         self._dict_of_vars = copy.deepcopy(dict_of_vars)
 
     def get_cmd(self, name):
-        return self._dict_of_cmds[name]
+        if self.cmd_exist(name):
+            return self._dict_of_cmds[name]
+        else:
+            return lambda param, inp, outp, env: self._dict_of_cmds["_external"](name, param, inp, outp, env);
 
     def get_var(self, name):
         return self._dict_of_vars[name]

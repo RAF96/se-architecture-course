@@ -1,5 +1,5 @@
 from cmds.implementation_cmd import *
-from cmds.implementation_internal_cmd import _nothing, _assignment_operator
+from cmds.implementation_internal_cmd import _nothing, _assignment_operator, _external
 
 DICT_OF_CMDS = {
     'cat': cat,
@@ -8,7 +8,8 @@ DICT_OF_CMDS = {
     'wc': wc,
     'pwd': pwd,
     '_assignment_operator': _assignment_operator,
-    '_nothing': _nothing
+    '_nothing': _nothing,
+    '_external': _external
 }
 
 DICT_OF_VARS = {
