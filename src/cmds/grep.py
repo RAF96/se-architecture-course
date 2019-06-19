@@ -1,8 +1,15 @@
 import argparse
 import re
 
+
 class GrepRun:
+    '''
+        Отвечает за поиск
+    '''
+
     def __call__(self, input_stream, output_stream):
+        if self.num_of_print_lines < 1:
+            raise RuntimeError("number of print lines should be more than 0")
         if not self.word:
             raise RuntimeError("grep doesn't have a word")
         result = ""
@@ -15,7 +22,6 @@ class GrepRun:
             result = self.search(text)
         print(result, file=output_stream)
 
-
     def search(self, text):
         result = []
         count = 0
@@ -25,11 +31,11 @@ class GrepRun:
                 result.append(line)
                 continue
 
-            flags = re.I if self.case_letters_important else 0
+            flags = 0 if self.case_letters_important else re.I
             pattern = self.word
             if self.whole_word:
-                pattern = " {} ".format(pattern)
-            success = re.search(self.word, line, flags=flags)
+                pattern = r"\b{}\b".format(pattern)
+            success = re.search(pattern, line, flags=flags)
             if success:
                 result.append(line)
                 count = self.num_of_print_lines
@@ -37,11 +43,19 @@ class GrepRun:
         return "\n".join(result)
 
 
-
 class Grep:
+    '''
+        Отвечает за парсинг комманд
+    '''
+
     def __init__(self):
         parser = argparse.ArgumentParser()
         self.parser = parser
+
+        def error(text):
+            raise RuntimeError(text)
+        parser.error = error
+
         parser.add_argument('word', nargs='?', type=str, default=None)
         parser.add_argument('file', nargs='?', default=None)
         parser.add_argument('-i', action='store_false', dest='case_letters_important')
@@ -53,4 +67,3 @@ class Grep:
         grep_run = GrepRun()
         self.parser.parse_args(parameters, namespace=grep_run)
         grep_run(input_stream, output_stream)
-

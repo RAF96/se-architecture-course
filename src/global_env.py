@@ -16,7 +16,7 @@ DICT_OF_CMDS = {
 
 DICT_OF_VARS = {
     'NEED_EXIT': False,
-    'print_prefix': ">> "
-    #'test_file': "/home/raf/tmp/code.hs" # need for debug. delete in release
+    'print_prefix': ">> ",
+    'file': "/home/raf/tmp/file.txt" # need for debug. delete in release
 }
 
