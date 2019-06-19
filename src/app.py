@@ -5,7 +5,11 @@ from settings import SETTINGS
 
 class App:
     '''
-        App
+        Ответственный за:
+        -- запуск приложения
+        -- хранении окружения
+        -- передачу ответственности по парсигу комманды
+        -- передачу ответственности по запуску комманды
     '''
 
     def __init__(self):
@@ -13,10 +17,13 @@ class App:
 
     def run(self):
         while not self.need_exit():
-            self.before()
-            line = input()
-            root_cmd = Parser(self.env).run(line)
-            root_cmd.run()
+            try:
+                self.before()
+                line = input()
+                root_cmd = Parser(self.env).run(line)
+                root_cmd.run()
+            except RuntimeError as e:
+                print(e)
 
     def need_exit(self):
         return self.env.get_var('NEED_EXIT')

@@ -1,22 +1,27 @@
 def cat(parameters, input_stream, output_stream, env):
-    for text, qoute in parameters:
-        with open(text, 'r') as file_in:
-            print(file_in.read(), file=output_stream, end='')
+    if not parameters:
+        print(input_stream.read(), file=output_stream, end='')
+    else:
+        for text, quote in parameters:
+            with open(text, 'r') as file_in:
+                print(file_in.read(), file=output_stream, end='')
+
 
 def echo(parameters, input_stream, output_stream, env):
     print(*[e.text for e in parameters], file=output_stream)
 
+
 def exit(parameters, input_stream, output_stream, env):
     env.set_var('NEED_EXIT', True)
 
-def wc(parameters, input_stream, output_stream, env):
 
+def wc(parameters, input_stream, output_stream, env):
     def print_info(text):
         print("{} {} {}".format(
-                                len(text.split('\n')) - 1,
-                                len(text.split(' ')),
-                                len(text) - 1),
-              file=output_stream
+            len(text.split('\n')) - 1,
+            len(text.split(' ')),
+            len(text) - 1),
+            file=output_stream
         )
 
     if parameters:

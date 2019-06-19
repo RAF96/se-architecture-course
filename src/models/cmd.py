@@ -4,8 +4,9 @@ import io
 
 class Cmd:
     '''
-        Cmd
+        Базовый класс для хранения комманды
     '''
+
     def __init__(self, name, parameters, env):
         self.name = name
         self.parameters = parameters
@@ -39,10 +40,11 @@ class Cmd:
         return res
 
 
-
-class MetaCmd:
+class Pipe:
     '''
-        MetaCmd
+        Ответственный за:
+        -- обработку двух комманд
+        -- перенаправление streams
     '''
 
     def __init__(self, first_cmd, second_cmd):

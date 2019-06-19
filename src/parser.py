@@ -1,11 +1,13 @@
 from expander import Expander
 from models import TextQuote
-from models.cmd import Cmd, MetaCmd
+from models.cmd import Cmd, Pipe
 
 
 class Parser:
     '''
-        Parser
+        Ответственный за:
+        -- разбиение по pipes
+        -- создание команд
     '''
 
     def __init__(self, env):
@@ -19,8 +21,8 @@ class Parser:
             if quote != '':
                 list_of_tokens.append(TextQuote(text, quote))
             else:
-                for text in text.split('|'):
-                    for element in text.split():
+                for words in text.split('|'):
+                    for element in words.split():
                         list_of_tokens.append(TextQuote(element, ""))
                     list_of_tokens.append(TextQuote("", "|"))
                 else:
@@ -54,7 +56,7 @@ class Parser:
             else:
                 cmd = Cmd(name_of_cmd.text, parameters, self.env)
 
-            root_cmd = cmd if root_cmd is None else MetaCmd(root_cmd, cmd)
+            root_cmd = cmd if root_cmd is None else Pipe(root_cmd, cmd)
 
         root_cmd = root_cmd if root_cmd else Cmd('_nothing', [], self.env)
         return root_cmd

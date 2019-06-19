@@ -1,4 +1,2 @@
-import collections
-
-
-TextQuote = collections.namedtuple('TextQuote', ['text', 'quote'])
+from .cmd import *
+from .text_quote import *
